@@ -18,6 +18,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var canvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
 
+
     init {
         setUpDrawing()
     }
@@ -43,21 +44,21 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
     //This is the setup to be able to draw on the canvas
     //if Canvas fails switch to nullable Canvas?
-    override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+        canvas?.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
 
         for(path in mPaths){
             mDrawPaint!!.strokeWidth = path.brushThickness
             mDrawPaint!!.color = path.color
-            canvas.drawPath(path, mDrawPaint!!)
+            canvas?.drawPath(path, mDrawPaint!!)
 
         }
 
-        if(!mDrawPath!!.isEmpty) {
+        if(!mDrawPath!!.isEmpty){
             mDrawPaint!!.strokeWidth = mDrawPath!!.brushThickness
             mDrawPaint!!.color = mDrawPath!!.color
-            canvas.drawPath(mDrawPath!!, mDrawPaint!!)
+            canvas?.drawPath(mDrawPath!!, mDrawPaint!!)
         }
     }
 
